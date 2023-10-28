@@ -1,36 +1,38 @@
 const myLibrary = [];
 
-function Book(title, author, pages, read, cover) {
+function Book(title, author, pages, read) {
   // the constructor...
   this.title = title;
   this.author = author;
   this.pages = pages;
   this.read = read;
-  this.cover = cover;
   this.info = function () {
     return `${this.title} by ${this.author}, ${this.pages} pages, ${this.read}`;
   }
 }
 
-let book1 = new Book("The Hobbit", "J.R.R. Tolkien", "295", "not read");
-
-myLibrary.push(book1);
-
 function addBookToLibrary() {
-  let newBook = dialog.showModal();
+  let showModal = document.getElementById("dialog");
+  dialog.showModal();
+
+  let newBook = new Book();
+
+  let form = document.getElementById("form");
+  form.addEventListener("submit", function(addBook) {
+    addBook.preventDefault();
+    newBook.title = document.getElementById("title").value;
+    newBook.author = document.getElementById("author").value;
+    newBook.pages = document.getElementById("pages").value;
+    newBook.read = document.getElementById("read").value;
+
+    showModal.close();
+  });
+ 
+  myLibrary.push(newBook);
 }
 
 function displayBooks() {
-  let main = document.getElementById("main");
-  let title = document.createElement("h2");
-  let list = document.createElement("ul");
-
-  for (let i = 0; i < myLibrary.length; i++) {
-    let listItem = document.createElement("li");
-    listItem.textContent = myLibrary[i];
-    list.appendChild(listItem);
-  }
-
-  main.appendChild(title);
-  main.appendChild(list);
+  myLibrary.forEach((book) => {
+    console.log(book.info());
+  });
 }

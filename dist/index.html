@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <div class="grid grid-cols-2 grid-rows-[200px_100px_1fr_50px] mx-12 gap-2">
+    <div class="grid grid-cols-2 grid-rows-[200px_100px_minmax(600px,_1fr)_50px] mx-12 gap-2">
         <!-- Header -->
         <div class="col-span-2 bg-gradient-to-r from-blue-500 rounded-xl text-center">
             <h1 class="text-4xl font-mono font-semibold mt-12 antialiased hover:subpixel-antialiased">Book Library</h1>
@@ -20,7 +20,7 @@
 
             <!-- Modal to add a new book -->
             <dialog id="dialog" class="fixed z-10 inset-0 overflow-y-auto rounded-xl">
-                <form action="#" class="p-8">
+                <form id ="form" action="" class="p-8">
                     <label class="block mt-4">
                         <span class="block text-sm font-medium text-slate-700">Title</span>
                         <input type="text" id="title" name="title" required class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1" placeholder="Book Title"/>
@@ -46,19 +46,19 @@
                     <fieldset class="mt-4 mb-4">
                         <legend class="block text-sm font-semibold text-slate-700">Did you read it?</legend>
                       
-                        <input id="draft" class="peer/yes" type="radio" name="status" checked />
-                        <label for="draft" class="peer-checked/yes:text-sky-500">Yes</label>
+                        <input id="read" class="peer/yes" type="radio" name="status" checked />
+                        <label for="read" class="peer-checked/yes:text-sky-500">Yes</label>
                       
-                        <input id="published" class="peer/no" type="radio" name="status" />
-                        <label for="published" class="peer-checked/no:text-sky-500">No</label>
+                        <input id="read" class="peer/no" type="radio" name="status" />
+                        <label for="read" class="peer-checked/no:text-sky-500">No</label>
                       
                         <div class="hidden peer-checked/yes:block mt-2">Good job!</div>
                         <div class="hidden peer-checked/no:block mt-2">You can do it!</div>
                       </fieldset>
                    
-                    <button class= "max-w-sm  mx-auto rounded-lg p-3 bg-blue-100 ring-1 ring-slate-900/5 shadow-lg space-y-3 hover:bg-slate-500 hover:ring-slate-600" type="submit">Add Book</button>
-                    <button class= "max-w-sm  mx-auto rounded-lg p-3 bg-blue-100 ring-1 ring-slate-900/5 shadow-lg space-y-3 hover:bg-slate-500 hover:ring-slate-600" type="reset">Reset</button>
-                    <button onclick="dialog.close()" class= "max-w-sm  mx-auto rounded-lg p-3 bg-blue-100 ring-1 ring-slate-900/5 shadow-lg space-y-3 hover:bg-slate-500 hover:ring-slate-600" type="close">Close</button>
+                    <button class= "max-w-sm  mx-auto rounded-lg p-3 bg-blue-100 ring-1 shadow-lg space-y-3 hover:bg-slate-400 hover:ring-slate-600" type="submit" name="submit">Add Book</button>
+                    <button class= "max-w-sm  mx-auto rounded-lg p-3 bg-blue-100 ring-1 shadow-lg space-y-3 hover:bg-slate-400 hover:ring-slate-600" type="reset">Reset</button>
+                    <button onclick="dialog.close()" class= "max-w-sm  mx-auto rounded-lg p-3 bg-blue-100 ring-1 shadow-lg space-y-3 hover:bg-slate-400 hover:ring-slate-600" type="close">Close</button>
                 </form>
             </dialog>
             <!-- Insert a new book -->
@@ -82,7 +82,24 @@
         </div>
         <!-- Main -->
         <div id="main" class="col-span-2 border-2">
-           
+            <table class="table-fixed w-full border-separate border border-slate-500">
+                <thead>
+                  <tr class="bg-slate-400">
+                    <th class="border border-slate-600">Title</th>
+                    <th class="border border-slate-600">Author</th>
+                    <th class="border border-slate-600">Pages</th>
+                    <th class="border border-slate-600">Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <tr class="odd:bg-slate-300 even:bg-slate-100 text-center font-semibold">
+                      <td class="border border-slate-700">The Hobbit</td>
+                      <td class="border border-slate-700">J.R.R. Tolkien</td>
+                      <td class="border border-slate-700">295</td>
+                      <td class="border border-slate-700">not read</td>
+                    </tr>
+                  </tbody>
+              </table>
         </div>
         <!-- Footer -->
         <div class="col-span-2 border-2">
