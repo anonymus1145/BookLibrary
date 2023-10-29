@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BookLibrary</title>
     <link rel="stylesheet" href="/dist/style/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="/dist/scripts/script.js"></script>
 </head>
 
@@ -112,20 +113,36 @@
                         <th class="border border-slate-600">Author</th>
                         <th class="border border-slate-600">Pages</th>
                         <th class="border border-slate-600">Did you read it?</th>
+                        <th class="border border-slate-600"></th>
                     </tr>
                 </thead>
                 <tbody id="booksTable">
-                    <tr class="bg-slate-300 text-center font-semibold">
-                        <td class="border border-slate-700">The Hobbit</td>
-                        <td class="border border-slate-700">J.R.R. Tolkien</td>
-                        <td class="border border-slate-700">295</td>
-                        <td class="border border-slate-700">No</td>
-                    </tr>
+                 <!-- Insert books here-->
                 </tbody>
             </table>
         </div>
         <!-- Footer -->
-        <div class="col-span-2 border-2">
+        <div
+            class="col-span-2 text-white bg-slate-700 fixed bottom-0 left-0 right-0 border-double border-4 rounded-3xl mx-16">
+            <footer class="footer">
+                <div class="flex items-center justify-center mt-1">
+                    <p>
+                        Copyright ©
+                        <script>
+                            document.write(new Date().getFullYear())
+                        </script>
+                        Anonymus1145
+                    </p>
+                </div>
+                <div class="flex items-center justify-center mt-1 gap-1">
+                    <a href="https://github.com/anonymus1145">
+                        <i class="fa fa-github" style="font-size:36px"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/daniel-besliu-440ab413a/">
+                        <i class="fa fa-linkedin-square" style="font-size:36px"></i>
+                    </a>
+                </div>
+            </footer>
         </div>
     </div>
 </body>

@@ -13,12 +13,13 @@ function Book(title, author, pages, read) {
 
 function addBookToLibrary() {
   let showModal = document.getElementById("dialog");
+  let formText = dialog.querySelector("form");
   dialog.showModal();
 
   let newBook = new Book();
 
   let form = document.getElementById("form");
-  form.addEventListener("submit", function(addBook) {
+  form.addEventListener("submit", function (addBook) {
     addBook.preventDefault();
     newBook.title = document.getElementById("title").value;
     newBook.author = document.getElementById("author").value;
@@ -27,15 +28,19 @@ function addBookToLibrary() {
 
     showModal.close();
   });
- 
+
   myLibrary.push(newBook);
+  formText.reset();
 }
 
 function displayBooks() {
+
+  document.getElementById("booksTable").innerHTML = "";
+
   myLibrary.forEach((book) => {
     let bookTr = document.createElement("tr");
     bookTr.classList.add("bg-slate-300", "text-center", "font-semibold");
-    
+
     let bookTitle = document.createElement("td");
     bookTitle.classList.add("border", "border-slate-700");
     bookTitle.innerText = book.title;
@@ -52,14 +57,56 @@ function displayBooks() {
     bookStatus.classList.add("border", "border-slate-700");
     bookStatus.innerText = book.read;
 
+    let bookButtons = document.createElement("td");
+    bookButtons.classList.add("border", "border-slate-700");
+    let divButtons = document.createElement("div");
+    divButtons.classList.add("btn-group", "space-x-3");
+    bookButtons.appendChild(divButtons);
+
+    // Buttons
+    let readBtn = document.createElement("button");
+    readBtn.classList.add("inline-flex", "items-center", "justify-center", "px-2", "bg-blue-600", "text-black", "border-black", "border-2", "rounded-3xl", "hover:bg-blue-800", "hover:text-white");
+    readBtn.innerText = "Edit Status";
+    let deleteBtn = document.createElement("button");
+    deleteBtn.classList.add("inline-flex", "items-center", "justify-center", "px-2", "bg-red-600", "text-black", "border-black", "border-2", "rounded-3xl", "hover:bg-red-800", "hover:text-white");
+    deleteBtn.innerText = "Delete";
+
+    readBtn.addEventListener("click", () => {
+      editBookStatus();
+    });
+
+    deleteBtn.addEventListener("click", () => {
+      deleteBook();
+    });
+    
+    divButtons.appendChild(deleteBtn);
+    divButtons.appendChild(readBtn);
+
     // Here can add cover image if needed
 
     bookTr.appendChild(bookTitle);
     bookTr.appendChild(bookAuthor);
     bookTr.appendChild(bookPages);
     bookTr.appendChild(bookStatus);
+    bookTr.appendChild(bookButtons);
 
     document.querySelector("tbody").appendChild(bookTr);
     // document.getElementById("booksTable").appendChild(bookTr);
   });
+}
+
+function deleteBook() {
+  let bookTitle = document.getElementsByTagName("td")[0].innerText;
+
+  myLibrary.forEach((book) => {
+    if (book.title === bookTitle) {
+      myLibrary.splice(myLibrary.indexOf(book), 1);
+    }
+  })
+  console.log(myLibrary);
+  displayBooks();
+}
+
+function editBookStatus() {
+  
 }
