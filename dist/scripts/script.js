@@ -33,6 +33,33 @@ function addBookToLibrary() {
 
 function displayBooks() {
   myLibrary.forEach((book) => {
-    console.log(book.info());
+    let bookTr = document.createElement("tr");
+    bookTr.classList.add("bg-slate-300", "text-center", "font-semibold");
+    
+    let bookTitle = document.createElement("td");
+    bookTitle.classList.add("border", "border-slate-700");
+    bookTitle.innerText = book.title;
+
+    let bookAuthor = document.createElement("td");
+    bookAuthor.classList.add("border", "border-slate-700");
+    bookAuthor.innerText = book.author;
+
+    let bookPages = document.createElement("td");
+    bookPages.classList.add("border", "border-slate-700");
+    bookPages.innerText = book.pages;
+
+    let bookStatus = document.createElement("td");
+    bookStatus.classList.add("border", "border-slate-700");
+    bookStatus.innerText = book.read;
+
+    // Here can add cover image if needed
+
+    bookTr.appendChild(bookTitle);
+    bookTr.appendChild(bookAuthor);
+    bookTr.appendChild(bookPages);
+    bookTr.appendChild(bookStatus);
+
+    document.querySelector("tbody").appendChild(bookTr);
+    // document.getElementById("booksTable").appendChild(bookTr);
   });
 }

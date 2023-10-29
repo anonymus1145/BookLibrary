@@ -4,7 +4,7 @@ module.exports = {
   theme: {
     extend: {
       // Grid Style //
-      'layout': '200px 100px minmax(600px, 1fr) 50px',
+      'layout': '200px 100px minmax(650px, 1fr) 50px',
     },
   },
   plugins: [],
