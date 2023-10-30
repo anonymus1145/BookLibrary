@@ -25,7 +25,7 @@ function addBookToLibrary() {
     newBook.author = document.getElementById("author").value;
     newBook.pages = document.getElementById("pages").value;
     newBook.read = document.getElementById("read").value;
-    
+
     showModal.close();
     formText.reset();
 
@@ -78,14 +78,14 @@ function displayBooks() {
     deleteBtn.classList.add("inline-flex", "items-center", "justify-center", "px-2", "bg-red-600", "text-black", "border-black", "border-2", "rounded-3xl", "hover:bg-red-800", "hover:text-white");
     deleteBtn.innerText = "Delete";
 
-    readBtn.addEventListener("click", () => {
-      editBookStatus();
+    readBtn.addEventListener("click", function (event) {
+      editBookStatus(event);
     });
 
-    deleteBtn.addEventListener("click", function(event) {
+    deleteBtn.addEventListener("click", function (event) {
       deleteBook(event);
     });
-    
+
     divButtons.appendChild(deleteBtn);
     divButtons.appendChild(readBtn);
 
@@ -106,6 +106,7 @@ function deleteBook(event) {
   event.target.parentNode.parentNode.parentNode.remove();
 }
 
-function editBookStatus() {
-  
+function editBookStatus(event) {
+  let bookStatus = event.target.parentNode.parentNode.previousSibling;
+  bookStatus.innerText = prompt("Please enter new status!\n \n Did you read it?");
 }
