@@ -1,4 +1,4 @@
-const myLibrary = [];
+let myLibrary = [];
 
 function Book(title, author, pages, read) {
   // the constructor...
@@ -25,24 +25,31 @@ function addBookToLibrary() {
     newBook.author = document.getElementById("author").value;
     newBook.pages = document.getElementById("pages").value;
     newBook.read = document.getElementById("read").value;
-
+    
     showModal.close();
-  });
+    formText.reset();
 
-  myLibrary.push(newBook);
-  formText.reset();
+    if (!newBook.title || !newBook.author || !newBook.pages || !newBook.read) {
+      newBook = null;
+    } else {
+      myLibrary.push(new Book(newBook.title, newBook.author, newBook.pages, newBook.read));
+    }
+  });
+  console.log(newBook);
+  console.log(myLibrary);
 }
 
 function displayBooks() {
 
-  document.getElementById("booksTable").innerHTML = "";
+  document.querySelector("tbody").innerHTML = "";
 
   myLibrary.forEach((book) => {
+
     let bookTr = document.createElement("tr");
-    bookTr.classList.add("bg-slate-300", "text-center", "font-semibold");
+    bookTr.classList.add("book", "bg-slate-300", "text-center", "font-semibold");
 
     let bookTitle = document.createElement("td");
-    bookTitle.classList.add("border", "border-slate-700");
+    bookTitle.classList.add("book-title", "border", "border-slate-700");
     bookTitle.innerText = book.title;
 
     let bookAuthor = document.createElement("td");
@@ -75,8 +82,8 @@ function displayBooks() {
       editBookStatus();
     });
 
-    deleteBtn.addEventListener("click", () => {
-      deleteBook();
+    deleteBtn.addEventListener("click", function(event) {
+      deleteBook(event);
     });
     
     divButtons.appendChild(deleteBtn);
@@ -95,16 +102,8 @@ function displayBooks() {
   });
 }
 
-function deleteBook() {
-  let bookTitle = document.getElementsByTagName("td")[0].innerText;
-
-  myLibrary.forEach((book) => {
-    if (book.title === bookTitle) {
-      myLibrary.splice(myLibrary.indexOf(book), 1);
-    }
-  })
-  console.log(myLibrary);
-  displayBooks();
+function deleteBook(event) {
+  event.target.parentNode.parentNode.parentNode.remove();
 }
 
 function editBookStatus() {
